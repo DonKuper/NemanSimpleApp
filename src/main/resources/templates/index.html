@@ -10,17 +10,29 @@
 <h3>List of Books</h3>
 
 <table class="centered">
-
-    <tr>
-        <th>Name</th>
-        <th>Author</th>
-    </tr>
-
+    <thread>
+        <tr>
+            <th>Name</th>
+            <th>Author</th>
+        </tr>
+    </thread>
+    <tbody>
     <tr th:each="book:${books}">
         <td th:text="${book.name}"/>
         <td th:text="${book.author}"/>
     </tr>
+    </tbody>
 </table>
+
+<form action="#" th:action="@{/}" th:object="${newBook}" method="post">
+    <p>Author: <input type="text" th:field="*{author}"></p>
+    <p>Name: <input type="text" th:field="*{name}"></p>
+    <p>
+        <input type="submit" value="Create new Book"/>
+        <input type="reset" value="Reset"/>
+    </p>
+</form>
+
 
 </body>
 </html>
