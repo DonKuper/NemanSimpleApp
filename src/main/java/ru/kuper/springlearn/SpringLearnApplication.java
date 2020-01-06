@@ -11,8 +11,8 @@ public class SpringLearnApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx =SpringApplication.run(SpringLearnApplication.class, args);
-        CatSound catSound =(CatSound)ctx.getBean("catSound");
-        System.out.println(catSound.sound());
+      //  CatSound catSound =(CatSound)ctx.getBean("catSound");
+      //  System.out.println(catSound.sound());
     }
 
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Primary
-@Profile("dog")
+@Profile({"dog", "default"})
 public class DogSound implements SoundAnimals {
 
     @Override
