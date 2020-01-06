@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kuper.springlearn.model.Book;
 import ru.kuper.springlearn.repo.BookRepository;
 
 @Controller
+@RequestMapping("/")
 public class HomeController {
 
     private BookRepository bookRepository;
@@ -17,7 +19,6 @@ public class HomeController {
     public HomeController(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-
 
     @GetMapping
     public String getIndex(Model model) {
