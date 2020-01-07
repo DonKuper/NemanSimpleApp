@@ -19,6 +19,7 @@ public class HomeController {
 
     //Один из вариантов однозначно определить реализацию Sound Animals:
     //public HomeController(BookRepository bookRepository, @Qualifier("catSound") SoundAnimals soundAnimals)
+
     @Autowired
     public HomeController(BookRepository bookRepository, SoundAnimals soundAnimals) {
         this.bookRepository = bookRepository;
