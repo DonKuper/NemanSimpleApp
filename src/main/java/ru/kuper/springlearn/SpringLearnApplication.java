@@ -13,7 +13,7 @@ import ru.kuper.springlearn.service.CatSound;
 import java.util.Arrays;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "outside")
+@ComponentScan(basePackages = {"outside","ru.kuper.springlearn"})
 public class SpringLearnApplication {
 
     public static void main(String[] args) {
