@@ -3,3 +3,11 @@ curl -H "Content-Type: application/json" -X POST -d {\"author\":\"dawkins\",\"na
 
 DELETE !!!
 curl -X DELETE http://localhost:8080/api/1
+
+#Замена записи
+PUT !!!
+curl -X PUT -H "Content-Type: application/json" -d "{\"id\":\"1\",\"author\":\"Dawkins\",\"name\":\"The Selfish Gene\"}" http://localhost:8080/api/1
+
+#Замена записи без имени (запишет null)
+PUT !!!
+curl -X PUT -H "Content-Type: application/json" -d "{\"id\":\"1\",\"author\":\"Dawkins\"}" http://localhost:8080/api/1

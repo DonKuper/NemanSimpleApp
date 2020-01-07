@@ -47,4 +47,10 @@ public class HomeControllerRest {
         }
     }
 
+    @PutMapping("/{id}")
+    public Book putBook(@RequestBody Book book) {
+        return bookRepository.save(book);
+    }
+
+
 }

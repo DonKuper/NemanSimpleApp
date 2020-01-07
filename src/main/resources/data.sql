@@ -1,4 +1,4 @@
-INSERT INTO book(author,name) VALUES ('oderski', 'skala programming');
-INSERT INTO book(author,name) VALUES ('gosling', 'java');
-INSERT INTO book(author,name) VALUES ('rich', 'clojure');
-INSERT INTO book(author,name) VALUES ('kupriyanov', 'history about kupriyanov');
+INSERT INTO book(author,name) VALUES ('Odersky', 'Skala');
+INSERT INTO book(author,name) VALUES ('Gosling', 'Java');
+INSERT INTO book(author,name) VALUES ('Rich', 'Clojure');
+INSERT INTO book(author,name) VALUES ('Dawkins', 'The Selfish Gene');
