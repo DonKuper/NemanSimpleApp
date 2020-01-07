@@ -12,6 +12,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = {"/api"}, produces = "application/json")
 public class HomeControllerRest {
+
    private BookRepository bookRepository;
 
     public HomeControllerRest(BookRepository bookRepository) {
@@ -52,5 +53,16 @@ public class HomeControllerRest {
         return bookRepository.save(book);
     }
 
+    @PatchMapping(path = "/{id}", consumes = "application/json")
+    public Book patchBook(@PathVariable("id") Long id,@RequestBody Book bookPath) {
+        Book bookRefresh = bookRepository.findById(id).get();
+        if (bookPath.getAuthor()!=null) {
+            bookRefresh.setAuthor(bookPath.getAuthor());
+        }
+        if (bookPath.getName()!=null) {
+            bookRefresh.setName(bookPath.getAuthor());
+        }
+        return bookRepository.save(bookRefresh);
+    }
 
 }

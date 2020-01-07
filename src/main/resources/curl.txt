@@ -11,3 +11,6 @@ curl -X PUT -H "Content-Type: application/json" -d "{\"id\":\"1\",\"author\":\"D
 #Замена записи без имени (запишет null)
 PUT !!!
 curl -X PUT -H "Content-Type: application/json" -d "{\"id\":\"1\",\"author\":\"Dawkins\"}" http://localhost:8080/api/1
+
+#PATCH !!!
+curl -X PATCH -H "Content-Type: application/json" -d "{\"id\":\"1\",\"author\":\"Dawkins\"}" http://localhost:8080/api/1
