@@ -1,5 +1,6 @@
 package ru.kuper.springlearn.controller;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,4 +36,15 @@ public class HomeControllerRest {
     public Book postBook(@RequestBody Book book) {
      return bookRepository.save(book);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteBookById(@PathVariable("id") Long id) {
+        try {
+            bookRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+
+        }
+    }
+
 }

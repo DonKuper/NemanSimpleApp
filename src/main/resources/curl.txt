@@ -1,1 +1,5 @@
+POST !!!
 curl -H "Content-Type: application/json" -X POST -d {\"author\":\"dawkins\",\"name\":\"Thebook\"} http://localhost:8080/api/
+
+DELETE !!!
+curl -X DELETE http://localhost:8080/api/1
