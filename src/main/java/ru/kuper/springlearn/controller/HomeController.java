@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kuper.springlearn.model.Book;
@@ -39,4 +40,16 @@ public class HomeController {
         bookRepository.save(book);
         return "redirect:/";
     }
+
+    @GetMapping("/{id}/show")
+    public String showById(@PathVariable("id") Long id, Model model) {
+        if(bookRepository.findById(id).isPresent()) {
+            model.addAttribute(bookRepository.findById(id).get());
+            return "show";
+        }
+        model.addAttribute("book",new Book());
+        return "show";
+    }
+
+
 }

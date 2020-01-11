@@ -7,23 +7,32 @@
 </head>
 <body>
 
-<h3 class="html-editor-align-center">List of Books</h3>
+<div class="container center-pill">
+    <h3>List of Books</h3>
+</div>
 
-<table class="html-editor-align-center">
+<table class="container center-pill">
     <thread>
         <tr>
             <th>Name</th>
             <th>Author</th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thread>
     <tbody>
     <tr th:each="book:${books}">
         <td th:text="${book.name}"/>
         <td th:text="${book.author}"/>
+        <td><a href="" th:href="@{'/' + ${book.id} + '/show'}">SHOW</a></td>
+        <td><a href="" th:href="@{'/' + ${book.id} + '/edit'}">SHOW</a></td>
+        <td><a href="" th:href="@{'/' + ${book.id} + '/delete'}">SHOW</a></td>
     </tr>
     </tbody>
 </table>
 
+<div class="container center-pill">
 <form action="#" th:action="@{/}" th:object="${newBook}" method="post" >
     <p>Author: <input type="text" th:field="*{author}"></p>
     <p>Name: <input type="text" th:field="*{name}"></p>
@@ -32,6 +41,7 @@
         <input type="reset" value="Reset" class="btn btn-primary red"/>
     </p>
 </form>
+</div>
 
 </body>
 </html>
