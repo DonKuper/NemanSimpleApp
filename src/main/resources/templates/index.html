@@ -26,8 +26,8 @@
         <td th:text="${book.name}"/>
         <td th:text="${book.author}"/>
         <td><a href="" th:href="@{'/' + ${book.id} + '/show'}">SHOW</a></td>
-        <td><a href="" th:href="@{'/' + ${book.id} + '/edit'}">SHOW</a></td>
-        <td><a href="" th:href="@{'/' + ${book.id} + '/delete'}">SHOW</a></td>
+        <td><a href="" th:href="@{'/' + ${book.id} + '/edit'}">EDIT</a></td>
+        <td><a href="" th:href="@{'/' + ${book.id} + '/delete'}">DELETE</a></td>
     </tr>
     </tbody>
 </table>

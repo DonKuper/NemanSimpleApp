@@ -11,6 +11,8 @@ import ru.kuper.springlearn.model.Book;
 import ru.kuper.springlearn.repo.BookRepository;
 import ru.kuper.springlearn.service.SoundAnimals;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
@@ -43,13 +45,19 @@ public class HomeController {
 
     @GetMapping("/{id}/show")
     public String showById(@PathVariable("id") Long id, Model model) {
-        if(bookRepository.findById(id).isPresent()) {
-            model.addAttribute(bookRepository.findById(id).get());
+        Optional bookObject = bookRepository.findById(id);
+        if(bookObject.isPresent()) {
+            model.addAttribute(bookObject.get());
             return "show";
         }
         model.addAttribute("book",new Book());
         return "show";
     }
 
+    @GetMapping("/{id}/delete")
+    public String deleteById(@PathVariable("id") Long id) {
+        bookRepository.deleteById(id);
+        return "redirect:/";
+    }
 
 }
