@@ -60,4 +60,19 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @GetMapping("/{id}/edit")
+    public String editFormById(@PathVariable("id") Long id, Model model) {
+        Optional bookObject = bookRepository.findById(id);
+        model.addAttribute(bookObject.get());
+        return "edit";
+    }
+
+    @PostMapping("/{id}")
+    public String editBook(@PathVariable("id") Long id, Book book) {
+        System.out.println(book);
+        bookRepository.save(book);
+        return "redirect:/";
+    }
+
+
 }
