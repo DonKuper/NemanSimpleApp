@@ -31,7 +31,7 @@ public class HomeController {
 
     @GetMapping
     public String getIndex(Model model) {
-        System.out.println("From controller: " + soundAnimals.sound());
+//        System.out.println("From controller: " + soundAnimals.sound());
         model.addAttribute("books", bookRepository.findAll());
         model.addAttribute("newBook",new Book());
         return "index";
@@ -42,6 +42,20 @@ public class HomeController {
         bookRepository.save(book);
         return "redirect:/";
     }
+
+    //Поиск книг
+    /*
+    @GetMapping
+    public String findBooksForm() {
+        return "search";
+    }
+
+    @PostMapping("/search")
+    public String findBooks(Book book, Model model) {
+        model.addAttribute("books", bookRepository.findByAuthorOrName(book.getAuthor(), book.getName()));
+        return "showFinded";
+    }
+*/
 
     @GetMapping("/{id}/show")
     public String showById(@PathVariable("id") Long id, Model model) {

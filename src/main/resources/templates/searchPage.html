@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+
+<div class="container center-pill">
+    <h3>Search books</h3>
+</div>
+
+<div class="container center-pill">
+    <form action="#" th:action="@{/}" th:object="${searchBook}" method="post">
+        <p>Author: <input type="text" th:field="*{author}"></p>
+        <p>Name: <input type="text" th:field="*{name}"></p>
+        <p>
+            <input type="submit" value="Create new Book" class="btn btn-primary green"/>
+            <input type="reset" value="Reset" class="btn btn-primary red"/>
+        </p>
+    </form>
+</div>
+
+</body>
+</html>
