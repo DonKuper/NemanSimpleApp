@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Books</title>
@@ -16,7 +16,7 @@
         <p>Author: <input type="text" th:field="*{author}"></p>
         <p>Name: <input type="text" th:field="*{name}"></p>
         <p>
-            <input type="submit" value="Create new Book" class="btn btn-primary green"/>
+            <input type="submit" value="Find books" class="btn btn-primary green"/>
             <input type="reset" value="Reset" class="btn btn-primary red"/>
         </p>
     </form>

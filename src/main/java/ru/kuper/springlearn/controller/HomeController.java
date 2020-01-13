@@ -43,20 +43,6 @@ public class HomeController {
         return "redirect:/";
     }
 
-    //Поиск книг
-    /*
-    @GetMapping
-    public String findBooksForm() {
-        return "search";
-    }
-
-    @PostMapping("/search")
-    public String findBooks(Book book, Model model) {
-        model.addAttribute("books", bookRepository.findByAuthorOrName(book.getAuthor(), book.getName()));
-        return "showFinded";
-    }
-*/
-
     @GetMapping("/{id}/show")
     public String showById(@PathVariable("id") Long id, Model model) {
         Optional bookObject = bookRepository.findById(id);
