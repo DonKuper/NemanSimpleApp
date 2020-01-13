@@ -2,6 +2,7 @@ package ru.kuper.springlearn.repo;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import ru.kuper.springlearn.aspect.Loggable;
 import ru.kuper.springlearn.model.Buyer;
 
 import java.sql.ResultSet;
@@ -16,17 +17,20 @@ public class BuyerRepoJDBC implements BuyerRepo{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Loggable
     @Override
     public Iterable<Buyer> findAll() {
         return jdbcTemplate.query("SELECT id, name, country, token FROM buyer",this::mapRowToBuyer);
     }
 
+    @Loggable
     @Override
     public Buyer findById(String id) {
         return jdbcTemplate.queryForObject("SELECT id, name, country, token FROM buyer WHERE id=?",this::mapRowToBuyer,id);
     }
 
 
+    @Loggable
     @Override
     public Buyer save(Buyer buyer) {
        jdbcTemplate.update("INSERT INTO buyer (id,name,country,token) values(?,?,?,?)", buyer.getId(), buyer.getName(), buyer.getCountiry(),buyer.getToken());
