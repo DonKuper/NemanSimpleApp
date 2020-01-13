@@ -3,12 +3,14 @@ package ru.kuper.springlearn.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ru.kuper.springlearn.model.Book;
 import ru.kuper.springlearn.repo.BookRepository;
 import ru.kuper.springlearn.service.SoundAnimals;
 import ru.kuper.springlearn.util.Util;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -97,8 +99,10 @@ public class HomeController {
     }
 
     @PostMapping("/{id}")
-    public String editBook(@PathVariable("id") Long id, Book book) {
-        System.out.println(book);
+    public String editBook(@PathVariable("id") Long id, @Valid Book book, Errors errors) {
+        if (errors.hasErrors()) {
+            return "edit";
+        }
         bookRepository.save(book);
         return "redirect:/";
     }
