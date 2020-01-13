@@ -38,15 +38,12 @@
         <p>Author: <input type="text" th:field="*{author}"></p>
         <p>Name: <input type="text" th:field="*{name}"></p>
         <p>
-            <input type="submit" value="Create new Book" class="btn btn-primary green"/>
-            <input type="reset" value="Reset" class="btn btn-primary red"/>
+            <button type="submit" name="action" value="save" class="btn btn-primary green">Save new book</button>
+            <button type="submit" name="action" value="find" class="btn btn-primary green">Find books</button>
         </p>
     </form>
 </div>
 
-<div class="container center-pill">
-    <a class="waves-effect waves-light btn" th:href="@{searchPage.html}">Find Books</a>
-</div>
 
 </body>
 </html>
