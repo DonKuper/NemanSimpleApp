@@ -32,7 +32,7 @@ public class LoggingAspect {
     }
     */
 
-    /*
+
     @AfterReturning(pointcut = "executeLogging()", returning = "returnValue")
     public void logMethodCall(JoinPoint joinPoint, Object returnValue) {
         StringBuilder message = new StringBuilder("Method: ");
@@ -41,8 +41,8 @@ public class LoggingAspect {
 
         log.info(message.toString());
     }
-*/
 
+/*
     @Around("executeLogging()")
     public Object logMethodCall(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
@@ -56,6 +56,6 @@ public class LoggingAspect {
         log.info(message.toString());
         return returnValue;
     }
-
+*/
 
 }

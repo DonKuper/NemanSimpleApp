@@ -22,11 +22,9 @@ public class Book {
     private Long id;
 
     @NotBlank
-    @Size(min = 5, message = "must be min 5 characters!")
+    @Size(min = 3, message = "must be min 3 characters!")
     private String name;
-    @Size(min = 7, message = "must be min 7 characters!")
+    @Size(min = 3, message = "must be min 3 characters!")
     private String author;
-
-
 
 }

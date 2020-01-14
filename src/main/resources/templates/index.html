@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>Books</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .validationError {
+            color: red;
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container center-pill">
@@ -36,7 +40,13 @@
 <div class="container center-pill">
     <form action="#" th:action="@{/}" th:object="${newBook}" method="post">
         <p>Author: <input type="text" th:field="*{author}"></p>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('author')}"
+              th:errors="*{author}"></span>
         <p>Name: <input type="text" th:field="*{name}"></p>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('name')}"
+              th:errors="*{name}"></span>
         <p>
             <button type="submit" name="action" value="save" class="btn btn-primary green">Save new book</button>
             <button type="submit" name="action" value="find" class="btn btn-primary green">Find books</button>

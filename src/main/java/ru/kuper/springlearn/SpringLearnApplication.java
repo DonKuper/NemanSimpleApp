@@ -34,6 +34,7 @@ public class SpringLearnApplication {
         System.out.println(csharp.learnMe());
 
         //SpringJDBC test
+    /*
         BuyerRepoJDBC buyerRepoJDBC = ctx.getBean(BuyerRepoJDBC.class);
         buyerRepoJDBC.save(new Buyer(1L,"Dima","Russia",1000));
         buyerRepoJDBC.save(new Buyer(2L,"Dimas","Ukraine",2000));
@@ -41,7 +42,7 @@ public class SpringLearnApplication {
         buyerRepoJDBC.findAll().forEach(System.out::println);
         System.out.println("-----by id---");
         System.out.println(buyerRepoJDBC.findById("1").toString());
-
+*/
     }
 
 

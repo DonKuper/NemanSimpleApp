@@ -1,10 +1,13 @@
 package ru.kuper.springlearn.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.kuper.springlearn.model.Book;
 import ru.kuper.springlearn.repo.BookRepository;
 import ru.kuper.springlearn.service.SoundAnimals;
@@ -52,27 +55,21 @@ public class HomeController {
 //    }
 
     @PostMapping(params = "action=save")
-    public String saveBook(Book book){
+    public String saveBook(@Valid Book book, Errors errors){
         bookRepository.save(book);
         return "redirect:/";
     }
 
     @PostMapping(params = "action=find")
-    public void findBooks(Book book, Model model) {
+    public ModelAndView findBooks(Book book, Model model) {
        Iterable<Book> iterable = bookRepository.findByAuthorOrName(book.getAuthor(),book.getName());
        Collection collection = util.makeCollection(iterable);
        if (!collection.isEmpty()) {
-           model.addAttribute("books",collection);
-           findBookslist(model);
+           model.addAttribute("books", iterable);
        }
+       return new ModelAndView("showfinded","books",iterable);
 
     }
-
-    @GetMapping("/showfinded")
-    public String findBookslist(Model model) {
-        return "showfinded";
-    }
-
 
     @GetMapping("/{id}/show")
     public String showById(@PathVariable("id") Long id, Model model) {
