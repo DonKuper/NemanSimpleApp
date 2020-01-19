@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import outside.Clojure;
+import ru.kuper.springlearn.model.Book;
 import ru.kuper.springlearn.model.Buyer;
+import ru.kuper.springlearn.repo.BookRepository;
 import ru.kuper.springlearn.repo.BuyerRepoJDBC;
 import ru.kuper.springlearn.service.CatSound;
 import ru.kuper.springlearn.service.Csharp;
@@ -53,5 +55,16 @@ public class SpringLearnApplication {
 //            Arrays.stream(ctx.getBeanDefinitionNames()).sorted().forEach(System.out::println);
 //        };
 //    }
+
+    @Bean
+    public CommandLineRunner preload(BookRepository bookRepository) {
+        return args -> {
+            bookRepository.save(new Book("java", "Gosling"));
+            bookRepository.save(new Book("elexir", "valim"));
+            bookRepository.save(new Book("scala", "odersky"));
+            bookRepository.save(new Book("clojure", "hitch"));
+        };
+    }
+
 
 }
