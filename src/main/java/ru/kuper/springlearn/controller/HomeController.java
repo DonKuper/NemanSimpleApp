@@ -3,11 +3,14 @@ package ru.kuper.springlearn.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.kuper.springlearn.domain.User;
 import ru.kuper.springlearn.model.Book;
 import ru.kuper.springlearn.repo.BookRepository;
 import ru.kuper.springlearn.service.SoundAnimals;
@@ -38,12 +41,28 @@ public class HomeController {
     }
 
     @GetMapping
-    public String getIndex(Model model) {
+    public String getIndex(@AuthenticationPrincipal User user, Model model) {
 //        System.out.println("From controller: " + soundAnimals.sound());
+        if (user != null) {
+            model.addAttribute("user", user.getUsername());
+            return "index";
+        }
+        model.addAttribute("user","anonymous");
         model.addAttribute("books", bookRepository.findAll());
         model.addAttribute("newBook",new Book());
         return "index";
     }
+
+    @GetMapping("/login")
+    public String login(){return "login";}
+
+    @PreAuthorize(value = "hasAuthority('USER') or hasAuthority('ADMIN')")
+    @GetMapping("/foruser")
+    public String foruser() {return "foruser";}
+
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
+    @GetMapping("/foradmin")
+    public String foradmin(){return "foradmin";}
 
 //    @PostMapping
 //    public String createBook(@ModelAttribute Book book, @RequestParam(value="action", required=true) String action ) {
