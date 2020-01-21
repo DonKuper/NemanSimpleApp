@@ -12,6 +12,18 @@
 </head>
 <body>
 
+<p th:text="${user}"></p>
+
+<form th:if="${user != 'anonymous'}" th:action="@{/logout}" method="post">
+    <input type="submit" value="logout"/>
+</form>
+
+<a th:href="@{/login}">Login page</a><br>
+<a th:href="@{/registration}">Registration page</a><br>
+<a th:href="@{/foruser}">foruser page</a><br>
+<a th:href="@{/foradmin}">foradmin page</a><br>
+
+
 <div class="container center-pill">
     <p th:text="${user}"></p>
 
