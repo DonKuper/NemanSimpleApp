@@ -76,13 +76,12 @@ public class HomeController {
         return "foradmin";
     }
 
-//    @PostMapping
-//    public String createBook(@ModelAttribute Book book, @RequestParam(value="action", required=true) String action ) {
-//
-//        if (action.equals("save")) {
-//            bookRepository.save(book);
-//            return "redirect:/";
-//        }
+
+//    @GetMapping("/sortedlist")
+//    public ModelAndView getsortedlist(Model model) {
+//        Iterable<Book> iterable = bookRepository.findSortedBooks();
+//        model.addAttribute("books",iterable);
+//        return new ModelAndView("sortedlist","books", iterable);
 //    }
 
     @PostMapping(params = "action=save")
