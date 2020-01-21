@@ -13,6 +13,21 @@
 <body>
 
 <div class="container center-pill">
+    <p th:text="${user}"></p>
+
+    <form th:if="${user != 'anonymous'}" th:action="@{/logout}" method="post">
+        <input type="submit" value="logout">
+    </form>
+</div>
+
+<div class="container center-pill">
+    <a th:href="@{/login}">Login page</a><br>
+    <a th:href="@{/registration}">Registration page</a><br>
+    <a th:href="@{/foruser}">foruser page</a><br>
+    <a th:href="@{/foradmin}">foradmin page</a><br>
+</div>
+
+<div class="container center-pill">
     <h3>List of Books</h3>
 </div>
 
@@ -31,8 +46,8 @@
         <td th:text="${book.name}"/>
         <td th:text="${book.author}"/>
         <td><a href="" th:href="@{'/' + ${book.id} + '/show'}">SHOW</a></td>
-        <td><a href="" th:href="@{'/' + ${book.id} + '/edit'}">EDIT</a></td>
-        <td><a href="" th:href="@{'/' + ${book.id} + '/delete'}">DELETE</a></td>
+        <td><a th:if="${isAdmin}" href="" th:href="@{'/' + ${book.id} + '/edit'}">EDIT</a></td>
+        <td><a th:if="${isAdmin}" href="" th:href="@{'/' + ${book.id} + '/delete'}">DELETE</a></td>
     </tr>
     </tbody>
 </table>

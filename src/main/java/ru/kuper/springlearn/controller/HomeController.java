@@ -1,23 +1,25 @@
 package ru.kuper.springlearn.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.kuper.springlearn.domain.Role;
+import ru.kuper.springlearn.domain.User;
 import ru.kuper.springlearn.model.Book;
 import ru.kuper.springlearn.repo.BookRepository;
 import ru.kuper.springlearn.service.SoundAnimals;
 import ru.kuper.springlearn.util.Util;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -26,6 +28,8 @@ public class HomeController {
     private BookRepository bookRepository;
     private SoundAnimals soundAnimals;
     private Util util;
+
+    private boolean isUser = false, isAdmin = false;
 
     //Один из вариантов однозначно определить реализацию Sound Animals:
     //public HomeController(BookRepository bookRepository, @Qualifier("catSound") SoundAnimals soundAnimals)
@@ -38,11 +42,38 @@ public class HomeController {
     }
 
     @GetMapping
-    public String getIndex(Model model) {
+    public String getIndex(@AuthenticationPrincipal User user, Model model) {
 //        System.out.println("From controller: " + soundAnimals.sound());
+        if (user != null) {
+            isUser = user.getRoles().contains(Role.USER);
+            isAdmin = user.getRoles().contains(Role.ADMIN);
+            model.addAttribute("user", user.getUsername());
+        } else {
+            model.addAttribute("user", "anonymous");
+            isUser = false; isAdmin = false;
+        }
+        model.addAttribute("isUser",isUser);
+        model.addAttribute("isAdmin",isAdmin);
         model.addAttribute("books", bookRepository.findAll());
         model.addAttribute("newBook",new Book());
         return "index";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @PreAuthorize(value = "hasAuthority('USER') or hasAuthority('ADMIN')")
+    @GetMapping("/foruser")
+    public String foruser() {
+        return "foruser";
+    }
+
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
+    @GetMapping("/foradmin")
+    public String foradmin(){
+        return "foradmin";
     }
 
 //    @PostMapping
