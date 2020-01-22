@@ -12,7 +12,7 @@ import ru.kuper.springlearn.domain.Role;
 import ru.kuper.springlearn.domain.User;
 import ru.kuper.springlearn.model.Book;
 import ru.kuper.springlearn.repo.BookRepository;
-import ru.kuper.springlearn.util.Util;
+import ru.kuper.springlearn.util.UtilClass;
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Optional;
@@ -24,14 +24,14 @@ public class HomeController {
 
     private BookRepository bookRepository;
 
-    private Util util;
+    private UtilClass utilClass;
 
     private boolean isUser = false, isAdmin = false;
 
     @Autowired
     public HomeController(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.util = new Util();
+        this.utilClass = new UtilClass();
     }
 
     @GetMapping
@@ -86,7 +86,7 @@ public class HomeController {
     @PostMapping(params = "action=find")
     public ModelAndView findBooks(Book book, Model model) {
        Iterable<Book> iterable = bookRepository.findByAuthorOrName(book.getAuthor(),book.getName());
-       Collection collection = util.makeCollection(iterable);
+       Collection collection = utilClass.makeCollection(iterable);
        if (!collection.isEmpty()) {
            model.addAttribute("books", iterable);
        }

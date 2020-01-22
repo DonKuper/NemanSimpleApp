@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Component
-public class Util {
+public class UtilClass {
 
     public <E> Collection<E> makeCollection(Iterable<E> iter) {
         Collection<E> list = new ArrayList<E>();
