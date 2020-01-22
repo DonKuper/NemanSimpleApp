@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Books</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <style>
-        .validationError {
-            color: red;
-        }
-    </style>
+  <div th:replace="/fragments/header :: header"/>
 </head>
+
 <body>
+<!--<div class="container center-pill">-->
+    <!--<p th:text="${user}"></p>-->
 
-<div class="container center-pill">
-    <p th:text="${user}"></p>
+    <!--<form th:if="${user != 'anonymous'}" th:action="@{/logout}" method="post">-->
+        <!--<input type="submit" value="logout">-->
+    <!--</form>-->
+<!--</div>-->
 
-    <form th:if="${user != 'anonymous'}" th:action="@{/logout}" method="post">
-        <input type="submit" value="logout">
-    </form>
-</div>
+    <div th:replace="/fragments/header :: userstate"/>
 
 <div class="container center-pill">
     <a th:href="@{/login}">Login page</a><br>
