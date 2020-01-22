@@ -12,32 +12,25 @@ import ru.kuper.springlearn.domain.Role;
 import ru.kuper.springlearn.domain.User;
 import ru.kuper.springlearn.model.Book;
 import ru.kuper.springlearn.repo.BookRepository;
-import ru.kuper.springlearn.service.SoundAnimals;
 import ru.kuper.springlearn.util.Util;
-
 import javax.validation.Valid;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
-import java.util.Set;
+
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
 
     private BookRepository bookRepository;
-    private SoundAnimals soundAnimals;
+
     private Util util;
 
     private boolean isUser = false, isAdmin = false;
 
-    //Один из вариантов однозначно определить реализацию Sound Animals:
-    //public HomeController(BookRepository bookRepository, @Qualifier("catSound") SoundAnimals soundAnimals)
-
     @Autowired
-    public HomeController(BookRepository bookRepository, SoundAnimals soundAnimals) {
+    public HomeController(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.soundAnimals = soundAnimals;
         this.util = new Util();
     }
 
