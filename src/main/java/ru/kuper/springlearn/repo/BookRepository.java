@@ -11,7 +11,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
     Iterable<Book> findByAuthorOrName(String author, String name);
 
-//    @Query("SELECT c FROM book as c")
-//    Iterable<Book> findSortedBooks();
+    @Query("SELECT b FROM Book b order by b.author")
+    Iterable<Book> findSortedBooks();
 
 }

@@ -77,12 +77,12 @@ public class HomeController {
     }
 
 
-//    @GetMapping("/sortedlist")
-//    public ModelAndView getsortedlist(Model model) {
-//        Iterable<Book> iterable = bookRepository.findSortedBooks();
-//        model.addAttribute("books",iterable);
-//        return new ModelAndView("sortedlist","books", iterable);
-//    }
+    @GetMapping("/sortedlist")
+    public ModelAndView getsortedlist(Model model) {
+        Iterable<Book> iterable = bookRepository.findSortedBooks();
+        model.addAttribute("books",iterable);
+        return new ModelAndView("sortedlist","books", iterable);
+    }
 
     @PostMapping(params = "action=save")
     public String saveBook(@Valid Book book, Errors errors){
