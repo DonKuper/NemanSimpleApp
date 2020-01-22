@@ -7,18 +7,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kuper.springlearn.domain.RegistrationForm;
-import ru.kuper.springlearn.repo.UserRepository;
+import ru.kuper.springlearn.service.impl.UserService;
 
 
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
+    private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
+    public RegistrationController(PasswordEncoder passwordEncoder, UserService userService) {
+        this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
+    }
 
     @GetMapping
     public String registration(){
@@ -27,7 +30,7 @@ public class RegistrationController {
 
     @PostMapping
     public String processUser(RegistrationForm form) {
-       userRepository.save(form.toUser(passwordEncoder));
+       userService.save(form.toUser(passwordEncoder));
        return  "redirect:/login";
     }
 

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.kuper.springlearn.domain.Role;
 import ru.kuper.springlearn.domain.User;
 import ru.kuper.springlearn.model.Book;
-import ru.kuper.springlearn.repo.BookRepository;
+import ru.kuper.springlearn.service.impl.BookService;
 import ru.kuper.springlearn.util.UtilClass;
 import javax.validation.Valid;
 import java.util.Collection;
@@ -22,16 +22,16 @@ import java.util.Optional;
 @RequestMapping("/")
 public class HomeController {
 
-    private BookRepository bookRepository;
+    private BookService bookService;
 
     private UtilClass utilClass;
 
     private boolean isUser = false, isAdmin = false;
 
     @Autowired
-    public HomeController(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-        this.utilClass = new UtilClass();
+    public HomeController(BookService bookService, UtilClass utilClass) {
+        this.bookService = bookService;
+        this.utilClass = utilClass;
     }
 
     @GetMapping
@@ -47,7 +47,7 @@ public class HomeController {
         }
         model.addAttribute("isUser",isUser);
         model.addAttribute("isAdmin",isAdmin);
-        model.addAttribute("books", bookRepository.findAll());
+        model.addAttribute("books", bookService.findAll());
         model.addAttribute("newBook",new Book());
         return "index";
     }
@@ -72,20 +72,20 @@ public class HomeController {
 
     @GetMapping("/sortedlist")
     public ModelAndView getsortedlist(Model model) {
-        Iterable<Book> iterable = bookRepository.findSortedBooks();
+        Iterable<Book> iterable = bookService.findSortedBooks();
         model.addAttribute("books",iterable);
         return new ModelAndView("sortedlist","books", iterable);
     }
 
     @PostMapping(params = "action=save")
     public String saveBook(@Valid Book book, Errors errors){
-        bookRepository.save(book);
+        bookService.save(book);
         return "redirect:/";
     }
 
     @PostMapping(params = "action=find")
     public ModelAndView findBooks(Book book, Model model) {
-       Iterable<Book> iterable = bookRepository.findByAuthorOrName(book.getAuthor(),book.getName());
+       Iterable<Book> iterable = bookService.findByAuthorOrName(book.getAuthor(),book.getName());
        Collection collection = utilClass.makeCollection(iterable);
        if (!collection.isEmpty()) {
            model.addAttribute("books", iterable);
@@ -96,7 +96,7 @@ public class HomeController {
 
     @GetMapping("/{id}/show")
     public String showById(@PathVariable("id") Long id, Model model) {
-        Optional bookObject = bookRepository.findById(id);
+        Optional bookObject = bookService.findById(id);
         if(bookObject.isPresent()) {
             model.addAttribute(bookObject.get());
             return "show";
@@ -107,13 +107,13 @@ public class HomeController {
 
     @GetMapping("/{id}/delete")
     public String deleteById(@PathVariable("id") Long id) {
-        bookRepository.deleteById(id);
+        bookService.deleteById(id);
         return "redirect:/";
     }
 
     @GetMapping("/{id}/edit")
     public String editFormById(@PathVariable("id") Long id, Model model) {
-        Optional bookObject = bookRepository.findById(id);
+        Optional bookObject = bookService.findById(id);
         model.addAttribute(bookObject.get());
         return "edit";
     }
@@ -123,7 +123,7 @@ public class HomeController {
         if (errors.hasErrors()) {
             return "edit";
         }
-        bookRepository.save(book);
+        bookService.save(book);
         return "redirect:/";
     }
 
