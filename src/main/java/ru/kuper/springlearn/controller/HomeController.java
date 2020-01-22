@@ -54,7 +54,7 @@ public class HomeController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "reg/login";
     }
 
     @PreAuthorize(value = "hasAuthority('USER') or hasAuthority('ADMIN')")

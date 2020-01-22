@@ -13,6 +13,7 @@ public class RegistrationForm {
     private String email;
     private String phone;
     private PasswordEncoder passwordEncoder;
+    private boolean adminCheck;
 
     public User toUser(PasswordEncoder passwordEncoder) {
         User user = new User();
@@ -20,7 +21,8 @@ public class RegistrationForm {
         user.setPassword(passwordEncoder.encode(password));
         user.setPhone(phone);
         user.setUsername(username);
-        user.setRoles(Collections.singleton(Role.USER));
+       if (adminCheck) { user.setRoles(Collections.singleton(Role.ADMIN)); }
+       else { user.setRoles(Collections.singleton(Role.USER)); }
         return user;
     }
 

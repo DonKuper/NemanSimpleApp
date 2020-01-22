@@ -27,6 +27,7 @@ public class Book {
     @Size(min = 3, message = "must be min 3 characters!")
     private String author;
 
+
     public Book(@NotBlank @Size(min = 3, message = "must be min 3 characters!") String name,
                 @Size(min = 3, message = "must be min 3 characters!") String author) {
         this.name = name;
@@ -34,5 +35,6 @@ public class Book {
     }
 
     public Book() {
+
     }
 }

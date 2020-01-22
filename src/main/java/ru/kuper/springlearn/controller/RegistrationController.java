@@ -22,7 +22,7 @@ public class RegistrationController {
 
     @GetMapping
     public String registration(){
-        return "registration";
+        return "reg/registration";
     }
 
     @PostMapping
@@ -30,6 +30,5 @@ public class RegistrationController {
        userRepository.save(form.toUser(passwordEncoder));
        return  "redirect:/login";
     }
-
 
 }
